@@ -1,7 +1,8 @@
+import AnimalsRouter from "./routes";
 
 function App() {
   return (
-    <></>
+    <AnimalsRouter/>
   );
 }
 
