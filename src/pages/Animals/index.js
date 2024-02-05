@@ -13,6 +13,15 @@ export default function Animals(){
     .then(response => {setAnimals(response.data)})
   }, []);
 
+  // update, navega para tela NewUpdate 
+  async function updateAnimal(id){
+    try {
+      navigate(`/newupdate/${id}`);
+    } catch (error) {
+      alert('erro ao acessar newUpdate');      
+    }
+  }
+
   return(
 
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
@@ -42,7 +51,8 @@ export default function Animals(){
                 <td>
 
                   <button data-testid="mybtn1" type="button"
-                  className="btn btn-outline-info" style={{margin: '2px'}}>Editar</button>
+                  className="btn btn-outline-info" style={{margin: '2px'}}
+                  onClick={() => updateAnimal(animal.id)}>Editar</button>
 
                   <button data-testid="mybtn2" type="button"
                   className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
