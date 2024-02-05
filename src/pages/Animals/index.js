@@ -1,8 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import api from '../../services/api';
+import api from '../../services/api';
 
 export default function Animals(){
+
+  const [my_animals, setAnimals] = useState([]);
+  const navigate = useNavigate();
+
+  // read, busca todos os registros na api
+  useEffect(() => {
+    api.get('api/v1/animals',{})
+    .then(response => {setAnimals(response.data)})
+  }, []);
 
   return(
 
@@ -18,17 +27,18 @@ export default function Animals(){
         <table data-testid="mytable" className="table table-hover">
           <thead>
             <tr>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
-              <th scope="col">##</th>
+              <th scope="col">Id</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Tamanho</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row"></th>
-                <td></td>
-                <td></td>
+            {my_animals.map(animal => (
+              <tr key={animal.id}>
+                <th scope="row">{animal.id}</th>
+                <td>{animal.name}</td>
+                <td>{animal.size}</td>
                 <td>
 
                   <button data-testid="mybtn1" type="button"
@@ -38,7 +48,9 @@ export default function Animals(){
                   className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
 
                 </td>
-            </tr>
+              </tr>
+            ))}
+            
           </tbody>
         </table>
 
