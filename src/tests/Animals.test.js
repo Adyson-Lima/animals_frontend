@@ -24,4 +24,8 @@ describe('Testes da tela Animals', () => {
     expect(screen.getByTestId('mytable')).toBeInTheDocument();
   });
 
+  it('Existe botão aditar em Animals?', () => {
+    expect(screen.getByTestId('mybtn1')).toBeInTheDocument();
+  });
+
 });
