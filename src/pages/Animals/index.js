@@ -22,6 +22,16 @@ export default function Animals(){
     }
   }
 
+  // delete, apaga um registro na api
+  async function deleteAnimal(id){
+    try {
+      await api.delete(`api/v1/animals/${id}`,{});
+      setAnimals(my_animals.filter(animal => animal.id !== id));
+    } catch (error) {
+      alert('Erro ao excluir registro');      
+    }
+  }
+
   return(
 
     <div data-testid="mycard" className="card border-primary" style={{marginTop: '20px'}} >
@@ -55,7 +65,8 @@ export default function Animals(){
                   onClick={() => updateAnimal(animal.id)}>Editar</button>
 
                   <button data-testid="mybtn2" type="button"
-                  className="btn btn-outline-danger" style={{margin: '2px'}}>Excluir</button>
+                  className="btn btn-outline-danger" style={{margin: '2px'}}
+                  onClick={() => deleteAnimal(animal.id)}>Excluir</button>
 
                 </td>
               </tr>
